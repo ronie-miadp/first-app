@@ -4,8 +4,9 @@ import { getPlantById } from '@/actions/plant.action';
 import { stackServerApp } from '@/stack';
 import { SignIn } from '@stackframe/stack';
 
+type PlantParams = { slug: string };
 
-export const generateMetadata = async({ params } : { params: { slug: string } }) => {
+export const generateMetadata = async({ params } : { params: PlantParams }) => {
     const { slug } = await params;  
     const [id] = slug.split("--");   
     const plant = await getPlantById(id);
@@ -15,7 +16,7 @@ export const generateMetadata = async({ params } : { params: { slug: string } })
     }
 }
 
-const page = async ({ params } : { params: { slug: string } }) => {
+const page = async ({ params } : { params: PlantParams }) => {
     const user = await stackServerApp.getUser();
     if(!user) return <SignIn />
 
