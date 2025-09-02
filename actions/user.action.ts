@@ -1,8 +1,9 @@
 "use server"
 
+import { stackServerApp } from "@/stack";
 import { neon } from "@neondatabase/serverless"
 
-const getUserDetails = async (id: string | undefined) => {
+export const getUserDetails = async (id: string | undefined) => {
     if(!process.env.DATABASE_URL) throw new Error("Database URL is not set!");
 
     if(!id) return null;
@@ -12,5 +13,7 @@ const getUserDetails = async (id: string | undefined) => {
     return user;
 }
 
-export default getUserDetails;
-
+export const getUserId = async () => {
+    const user = await stackServerApp.getUser();
+    return user?.id;
+}

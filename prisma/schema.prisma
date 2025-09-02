@@ -8,7 +8,7 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model Plant {
+model Plants {
     id String @id @default(cuid())
     name String
     description String?

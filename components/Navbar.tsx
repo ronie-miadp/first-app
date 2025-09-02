@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 import { HomeIcon, LogIn, LogOut, Sprout } from 'lucide-react'
 import { ModeToggle } from './ModeToggle'
 import { stackServerApp } from '@/stack'
-import getUserDetails from '@/actions/user.action'
+import { getUserDetails } from '@/actions/user.action'
 import { UserButton } from '@stackframe/stack'
 
 const Navbar = async () => {
