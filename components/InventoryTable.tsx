@@ -16,6 +16,7 @@ import React from "react";
 import { getPlants } from "@/actions/plant.action";
 import { useRouter } from "next/navigation";
 import CreateDialog from "./CreateDialog";
+import EditDialog from "./EditDialog";
 
 type Plant = Awaited<ReturnType<typeof getPlants>>;
 
@@ -68,8 +69,8 @@ const InventoryTable = ({ plants } : InventoryTableProps ) => {
                             <TableCell>{plant.price}</TableCell>
                             <TableCell className="font-bold">{plant.stock}</TableCell>
                             <TableCell className="text-right">
-                                <div className="flex justify-end space-x-4">
-                                    <h1>Edit</h1>
+                                <div className="flex justify-end space-x-4" onClick={(e) => e.stopPropagation()}>
+                                    <EditDialog plant={plant} />
                                     <h1>Delete</h1>
                                 </div>
                             </TableCell>
