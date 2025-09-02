@@ -1,6 +1,8 @@
 import React from 'react'
 import PlantCard from './PlantCard'
 import { getPlantById } from '@/actions/plant.action';
+import { stackServerApp } from '@/stack';
+import { SignIn } from '@stackframe/stack';
 
 
 export const generateMetadata = async({ params } : { params: { slug: string } }) => {
@@ -14,6 +16,8 @@ export const generateMetadata = async({ params } : { params: { slug: string } })
 }
 
 const page = async ({ params } : { params: { slug: string } }) => {
+    const user = await stackServerApp.getUser();
+    if(!user) return <SignIn />
 
     const { slug } = await params;  
     const [id] = slug.split("--");   
