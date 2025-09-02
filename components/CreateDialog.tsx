@@ -18,10 +18,20 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import toast from "react-hot-toast";
 import { createPlant } from "@/actions/plant.action";
-// import ImageUpload from "./ImageUpload";
+
+type PlantInput = {
+  name: string;
+  description: string;
+  stock: number;
+  price: number;
+  category: string;
+  userId: string;
+  imageUrl: string;
+  file?: File | null;
+};
 
 export default function CreateDialog() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<PlantInput>({
     name: "",
     description: "",
     stock: 1,
@@ -29,16 +39,33 @@ export default function CreateDialog() {
     category: "",
     userId: "",
     imageUrl: "",
+    file: null,
   });
 
-  const handleChange = (field: string, value: string | number) => {
+  const handleChange = (field: string, value: string | number | File | null) => {
     setFormData({ ...formData, [field]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const newPlant = await createPlant(formData);
+      let imageUrl = "";
+
+      if (formData.file) {
+          const uploadData = new FormData();
+          uploadData.append("file", formData.file);
+
+          const res = await fetch("/api/upload", {
+            method: "POST",
+            body: uploadData,
+          });
+
+          const data = await res.json();
+          imageUrl = `/uploads/${data.fileName}`; // Save relative path
+      }
+
+      const { file, ...currentData } = formData;  // ✅ remove "file"
+      const newPlant = await createPlant({ ...currentData, imageUrl });
       console.log("plant created: ", newPlant);
       toast.success("Plant created successfully");
     } catch (error) {
@@ -123,13 +150,14 @@ export default function CreateDialog() {
 
           {/*Image Upload*/}
           <div className="py-5">
-          {/* <ImageUpload
-            endpoint="postImage"
-            value={formData.imageUrl}
-            onChange={(url: any) => {
-              handleChange("imageUrl", url);
-            }}
-          /> */}
+           <Label htmlFor="image">Image</Label>
+            <Input
+              id="image"
+              type="file"
+              placeholder="Enter image"
+              accept="image/*"
+              onChange={(e) => handleChange("file", e.target.files?.[0] || null)}
+            />
           </div>
           
 
