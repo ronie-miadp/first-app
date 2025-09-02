@@ -16,8 +16,8 @@ import { Input } from "./ui/input";
 import { Combobox } from "./ui/combobox";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-// import { createPlant } from "@/actions/plant.aciton";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import { createPlant } from "@/actions/plant.action";
 // import ImageUpload from "./ImageUpload";
 
 export default function CreateDialog() {
@@ -32,19 +32,19 @@ export default function CreateDialog() {
   });
 
   const handleChange = (field: string, value: string | number) => {
-    // setFormData({ ...formData, [field]: value });
+    setFormData({ ...formData, [field]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // try {
-    //   const newPlant = await createPlant(formData);
-    //   console.log("plant created: ", newPlant);
-    //   toast.success("Plant created successfully");
-    // } catch (error) {
-    //   console.error("error creating plant", error);
-    //   toast.error("Failed to create plant");
-    // }
+    try {
+      const newPlant = await createPlant(formData);
+      console.log("plant created: ", newPlant);
+      toast.success("Plant created successfully");
+    } catch (error) {
+      console.error("error creating plant", error);
+      toast.error("Failed to create plant");
+    }
   };
 
   return (
