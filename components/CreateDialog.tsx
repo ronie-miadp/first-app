@@ -61,7 +61,7 @@ export default function CreateDialog() {
           });
 
           const data = await res.json();
-          imageUrl = `/uploads/${data.fileName}`; // Save relative path
+          imageUrl = data.filePath;
       }
 
       const { file, ...currentData } = formData;  // ✅ remove "file"

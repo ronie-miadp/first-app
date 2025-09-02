@@ -15,7 +15,8 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const fileName = `${Date.now()}-${file.name}`;
+    // const fileName = `${Date.now()}-${file.name}`;
+    const fileName = file.name;
     const uploadDir = path.join(process.cwd(), "public/uploads");
 
     // ✅ Ensure uploads folder exists
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
     await writeFile(filePath, buffer);
 
     // Return relative path to be used in <img src="">
-    return NextResponse.json({ fileName: `/uploads/${fileName}` });
+    return NextResponse.json({ filePath: `/uploads/${fileName}` });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ error: "File upload failed" }, { status: 500 });
