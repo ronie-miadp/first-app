@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import React from "react";
 import { Button } from "./ui/button";
-import { Sprout } from "lucide-react";
+import { EditIcon, Sprout } from "lucide-react";
 import { Input } from "./ui/input";
 import { Combobox } from "./ui/combobox";
 import { Label } from "./ui/label";
@@ -63,7 +63,7 @@ export default function EditDialog({ plant } : EditDialogProps) {
 
         >
           <span>
-            <Sprout className="w-4 h-4" />
+            <EditIcon className="w-4 h-4" />
             Edit
           </span>
         </Button>
