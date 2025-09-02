@@ -1,0 +1,22 @@
+
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Plant {
+    id String @id @default(cuid())
+    name String
+    description String?
+    category String
+    stock Int
+    price Float
+    userId String
+    imageUrl String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
