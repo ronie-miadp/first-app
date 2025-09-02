@@ -15,6 +15,7 @@ import { Combobox } from "./ui/combobox";
 import React from "react";
 import { getPlants } from "@/actions/plant.action";
 import { useRouter } from "next/navigation";
+import CreateDialog from "./CreateDialog";
 
 type Plant = Awaited<ReturnType<typeof getPlants>>;
 
@@ -40,6 +41,8 @@ const InventoryTable = ({ plants } : InventoryTableProps ) => {
                 <Search className="absolute h-4 w-4 left-3 top-1/2 transform -translate-y-1/2" />
             </div>
             <Combobox value={category} onChange={(val) => setCategory(val)} />
+            {/* <h1>Create Plant</h1> */}
+            <CreateDialog />
         </div>
         <Table>
             <TableHeader>
