@@ -60,7 +60,6 @@ export default function EditDialog({ plant } : EditDialogProps) {
           imageUrl = data.filePath;
       }
 
-      console.info({imageUrl});
 
       const { file, ...currentData } = formData;  // ✅ remove "file"
       const newPlant = await editPlant(plant.id, {...currentData, imageUrl });

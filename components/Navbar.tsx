@@ -21,7 +21,7 @@ const Navbar = async () => {
                 {/* Logo */}
                 <div className="flex item-center">
                     <Link href="/" className="text-xl fon t-bold text-primary font-mon tracking-wider">
-                        Plantventory
+                        Sample
                     </Link>
                 </div>
 
